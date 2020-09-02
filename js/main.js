@@ -2,24 +2,38 @@ let imgArray = ['img/aigle.png', 'img/canard.png', 'img/flammand.png', 'img/fly.
                 'img/aigle.png', 'img/canard.png', 'img/flammand.png', 'img/fly.png', 'img/penguin.png', 'img/singer.png'
 ];
 
+let toto = [];
+//random choice img
+function randomImg() {
+    while(imgArray.length !== 0) {
+        let imgRandom = imgArray[Math.floor(Math.random() * Math.floor(4))];
+        const findImgIndex = (element) => element === imgRandom;
+        let indexImg = imgArray.findIndex(findImgIndex);
+        if(indexImg !== -1){
+            toto.push(imgRandom);
+            imgArray.splice(indexImg,1);
+        }
+    }   
+}
+randomImg();
+
 //Empty cardArray
 let cardArray = [];
 // create twelve cards and images in cardArray
 // function to show cards or images
 function showCard() {
-    for(let i = 0; i < imgArray.length; i++) {  
+    for(let i = 0; i < toto.length; i++) {  
         let card = document.createElement("img");
         document.getElementById("cardDiv").appendChild(card);
         card.classList.add("col-3", "m-2");
         card.style.width = "15%";
         card.style.height = "15vh";
-        card.src = imgArray[i];
+        card.src = toto[i];
         card.style.backgroundColor = "black";
         cardArray.push(card);
     }
 }
 showCard();
-console.log(cardArray);
 
 let pairCard = [];
 function playTheGame() {
@@ -50,16 +64,3 @@ function playTheGame() {
     }
 }
 playTheGame();
-
-let toto = [];
-//random choice
-function randomImg(tableau) {
-    for( j = 0; j < tableau.length; j++) {
-        let imgRandom = tableau[Math.floor(Math.random() * j)];
-        console.log(imgRandom);
-        toto.push(imgRandom);
-        console.log(toto);
-        tableau.splice(tableau.indexOf(imgRandom,0),1);   
-     }   
-}
-randomImg(imgArray);
