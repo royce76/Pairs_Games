@@ -8,28 +8,45 @@ let cardArray = [];
 // function to show cards or images
 function showCard() {
     for(let i = 0; i < imgArray.length; i++) {  
-        let card = document.createElement("button");
+        let card = document.createElement("img");
         document.getElementById("cardDiv").appendChild(card);
-        card.style.type = "button";
-        card.innerText = "cliquer";
-        card.classList.add("btn", "btn-primary","col-3", "m-2");
+        card.classList.add("col-3", "m-2");
         card.style.width = "15%";
-        card.style.height = "20vh";
-        /* card.style.backgroundImage = imgArray[i]; */
+        card.style.height = "15vh";
+        card.src = imgArray[i];
+        card.style.backgroundColor = "black";
         cardArray.push(card);
     }
 }
 showCard();
 console.log(cardArray);
 
-for(let k = 0; k < cardArray.length; k++){
-    cardArray[k].addEventListener("click", function(){
-        let img = document.createElement("img");
-        cardArray[k] = img;
-        img.style.width = "15%";
-        img.style.height = "20vh";
-        img.classList.add("col-3", "m-2");
-        img.src = imgArray[k];
-        console.log(cardArray[k]);
-    });
+let pairCard = [];
+function playTheGame() {
+    for(let k = 0; k < cardArray.length; k++) {
+        cardArray[k].addEventListener("click", function clique(){
+            if(cardArray[k].style.backgroundColor === "black") {
+                cardArray[k].style.backgroundColor = "transparent"; 
+                pairCard.push(cardArray[k]);
+                console.log(pairCard);     
+                if(pairCard.length === 2) {
+                    if(pairCard[0].src === pairCard[1].src) {
+                        console.log(cardArray);
+                        pairCard.splice(0,2);
+                        console.log(pairCard);
+                    }
+                    else {
+                        pairCard[0].style.backgroundColor = "black";
+                        pairCard[1].style.backgroundColor = "black";
+                        pairCard.splice(0,2);
+                        console.log(pairCard);
+                    }
+                }
+            }
+            else if(cardArray[k].style.backgroundColor === "transparent") {
+                cardArray[k].removeEventListener("click", clique);
+            }
+        });
+    }
 }
+playTheGame();
