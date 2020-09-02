@@ -50,3 +50,16 @@ function playTheGame() {
     }
 }
 playTheGame();
+
+let toto = [];
+//random choice
+function randomImg(tableau) {
+    for( j = 0; j < tableau.length; j++) {
+        let imgRandom = tableau[Math.floor(Math.random() * j)];
+        console.log(imgRandom);
+        toto.push(imgRandom);
+        console.log(toto);
+        tableau.splice(tableau.indexOf(imgRandom,0),1);   
+     }   
+}
+randomImg(imgArray);
