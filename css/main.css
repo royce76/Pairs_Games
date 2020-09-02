@@ -90,10 +90,16 @@ textarea {
     /*General rules*/
   
     header {
-      height: 10vh;
-      margin-bottom: 1em;
+      height: 15vh;
     }
 
+    footer {
+      height: 10vh;
+    }
+
+    /*Utility classes*/
+
+    
 
 /* ==========================================================================
    Helper classes
