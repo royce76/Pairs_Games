@@ -70,9 +70,22 @@ function playTheGame() {
         });
     }
 }
+let computeClick = 0;
+function countClick() {
+    for(let cardArrays of cardArray) {
+        cardArrays.addEventListener("click", function compute(){
+            computeClick ++;
+            console.log(computeClick);
+            if(computeClick > 5) {
+                cardArrays.removeEventListener("click", compute());
+                computeClick = 0;
+            }
+        });
+        computeClick = 0;
+    }
+}
 
-
-//
+//we create a button and add a event click on
 function startTheGame(){
     let button = document.createElement("button");
     document.getElementById("cardDiv").appendChild(button);
@@ -84,6 +97,7 @@ function startTheGame(){
         randomImg();
         showCard();
         playTheGame();
+        countClick();
     });
 }
 
