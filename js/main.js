@@ -1,4 +1,4 @@
-document.getElementById("cardDiv").style.height = "75vh";
+document.getElementById("cardDiv").style.height = "65vh";
 
 //main array of sources images 
 let imgArray = ['img/aigle.png', 'img/canard.png', 'img/flammand.png', 'img/fly.png', 'img/penguin.png', 'img/singer.png',
