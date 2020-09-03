@@ -99,8 +99,19 @@ textarea {
 
     /*Utility classes*/
 
-    
+    .pointerEventsNone {
+      pointer-events: none;
+      cursor: not-allowed;
+    }
 
+    .pointerEventsAuto {
+      pointer-events: auto;
+      cursor: grab;
+    }
+    
+    .grab {
+      cursor: grab;
+    }
 /* ==========================================================================
    Helper classes
    ========================================================================== */

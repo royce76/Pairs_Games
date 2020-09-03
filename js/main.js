@@ -46,42 +46,31 @@ function showCard() {
 let pairCard = [];
 function playTheGame() {
     for(let k = 0; k < cardArray.length; k++) {
+        cardArray[k].classList.add("pointerEventsAuto");
         cardArray[k].addEventListener("click", function clique(){
             if(cardArray[k].style.backgroundColor === "black") {
                 cardArray[k].style.backgroundColor = "transparent"; 
                 pairCard.push(cardArray[k]);
                 //after two clicks the pair of clicked images is compared in a table     
-                if(pairCard.length === 2) {
+                if(pairCard.length <= 2) {
+                    console.log(pairCard);
+                    cardArray[k].classList.add("pointerEventsNone");
                     if(pairCard[0].src === pairCard[1].src) {
                         //we empty that pair Array
                         pairCard.splice(0,2);
+                        cardArray[k].classList.add("pointerEventsAuto");
                     }
                     else {
-                        pairCard[0].style.backgroundColor = "black";
-                        pairCard[1].style.backgroundColor = "black";
-                        pairCard.splice(0,2);
+                        setTimeout(function(){
+                            pairCard[0].style.backgroundColor = "black";
+                            pairCard[1].style.backgroundColor = "black";
+                            pairCard.splice(0,2);
+                            cardArray[k].classList.add("pointerEventsAuto");
+                        },2000);
                     }
                 }
             }
-            //be sure not to click on an image no "black"
-            else if(cardArray[k].style.backgroundColor === "transparent") {
-                cardArray[k].removeEventListener("click", clique);
-            }
         });
-    }
-}
-let computeClick = 0;
-function countClick() {
-    for(let cardArrays of cardArray) {
-        cardArrays.addEventListener("click", function compute(){
-            computeClick ++;
-            console.log(computeClick);
-            if(computeClick > 5) {
-                cardArrays.removeEventListener("click", compute());
-                computeClick = 0;
-            }
-        });
-        computeClick = 0;
     }
 }
 
@@ -97,7 +86,6 @@ function startTheGame(){
         randomImg();
         showCard();
         playTheGame();
-        countClick();
     });
 }
 
