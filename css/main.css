@@ -94,9 +94,12 @@ textarea {
     }
 
     footer {
-      height: 10vh;
+      height: 5vh;
     }
 
+    #cardDiv {
+      height: 75vh;
+    }
     /*Utility classes*/
 
 /* ==========================================================================

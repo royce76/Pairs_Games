@@ -1,4 +1,6 @@
-document.getElementById("cardDiv").style.height = "65vh";
+//target paragraph score
+let scoreText = document.getElementById('score');
+let timeText = document.getElementById('timer');
 
 //main array of sources images 
 let imgArray = ['img/aigle.png', 'img/canard.png', 'img/flammand.png', 'img/fly.png', 'img/penguin.png', 'img/singer.png',
@@ -64,6 +66,7 @@ function compare() {
 function playTheGame() {
     for(let cardSelect of cardArray) {
         cardSelect.addEventListener("click", function clique(){
+            computeClick();
             //to not let user click after two cards appeared
             if(pairCard.length < 2 && cardSelect.style.backgroundColor === "black") {
                 cardSelect.style.backgroundColor = "transparent"; 
@@ -74,12 +77,48 @@ function playTheGame() {
     }
 }
 
+let timer = 120;
+function timeGame() {
+    let interval = setInterval(function(){
+        timer --;
+        timeText.innerText = `Left time = ${timer} secondes.`
+        console.log(timer);
+        if(timer === 0) {
+            clearInterval(interval);
+            document.addEventListener("click", function(data){
+                data.preventDefault();
+                data.stopPropagation();
+            },true);
+            timeText.innerText = "";
+            scoreText.innerText = "You loose";
+            timer = 120; 
+        }
+    }, 1000);  
+}
+
+let score = 20;
+function computeClick () {
+    score --;
+    scoreText.innerText = `Left click = ${score}.`
+    if(score === 0) {
+        document.addEventListener("click", function(data){
+            data.preventDefault();
+            data.stopPropagation();
+        },true);
+        scoreText.innerText = `You loose.`
+        timeText.innerText = "";
+        score = 20;
+    }
+}
+
+
+
 //Cancel the double click with preventDefault.
 document.addEventListener( 'dblclick', function(event) {   
     event.preventDefault();  
     event.stopPropagation();
-  },  true //capturing phase!!
-);
+  },true //capturing phase!!
+  );
 
 //we create a button and add a event click on
 function startTheGame(){
@@ -88,11 +127,15 @@ function startTheGame(){
     button.classList.add("btn", "btn-primary", "col-10", "offset-1","my-auto");
     button.style.height = "20%";
     button.innerText = "Démarrer";
+    scoreText.innerText = "WELCOME";
     button.addEventListener("click", function(){
         button.style.display = "none";
         randomImg();
         showCard();
         playTheGame();
+        timeGame();
+        scoreText.innerText = `Left click = ${score}`;
+        timeText.innerText = `left time = ${timer} secondes`;
     });
 }
 
