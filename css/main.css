@@ -94,24 +94,14 @@ textarea {
     }
 
     footer {
-      height: 10vh;
+      height: 5vh;
     }
 
+    #cardDiv {
+      height: 75vh;
+    }
     /*Utility classes*/
 
-    .pointerEventsNone {
-      pointer-events: none;
-      cursor: not-allowed;
-    }
-
-    .pointerEventsAuto {
-      pointer-events: auto;
-      cursor: grab;
-    }
-    
-    .grab {
-      cursor: grab;
-    }
 /* ==========================================================================
    Helper classes
    ========================================================================== */
