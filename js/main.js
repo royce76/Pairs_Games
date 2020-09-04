@@ -74,6 +74,13 @@ function playTheGame() {
     }
 }
 
+//Cancel the double click with preventDefault.
+document.addEventListener( 'dblclick', function(event) {   
+    event.preventDefault();  
+    event.stopPropagation();
+  },  true //capturing phase!!
+);
+
 //we create a button and add a event click on
 function startTheGame(){
     let button = document.createElement("button");
