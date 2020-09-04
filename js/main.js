@@ -39,36 +39,36 @@ function showCard() {
     }
 }
 
-
 //function to play the game
 //first you can only click backgroundColor = "black"
 //then image appears
 let pairCard = [];
+
+function compare() {
+    //after two clicks the pair of clicked images is compared in a table     
+    if(pairCard.length === 2) {
+        if(pairCard[0].src === pairCard[1].src) {
+             //we empty that pair Array
+             pairCard.splice(0,2);
+        }
+        else {
+             setTimeout(function(){
+                 pairCard[0].style.backgroundColor = "black";
+                 pairCard[1].style.backgroundColor = "black";
+                 pairCard.splice(0,2);
+            },2000);
+        }
+    }
+}
+
 function playTheGame() {
-    for(let k = 0; k < cardArray.length; k++) {
-        cardArray[k].classList.add("pointerEventsAuto");
-        cardArray[k].addEventListener("click", function clique(){
-            if(cardArray[k].style.backgroundColor === "black") {
-                cardArray[k].style.backgroundColor = "transparent"; 
-                pairCard.push(cardArray[k]);
-                //after two clicks the pair of clicked images is compared in a table     
-                if(pairCard.length <= 2) {
-                    console.log(pairCard);
-                    cardArray[k].classList.add("pointerEventsNone");
-                    if(pairCard[0].src === pairCard[1].src) {
-                        //we empty that pair Array
-                        pairCard.splice(0,2);
-                        cardArray[k].classList.add("pointerEventsAuto");
-                    }
-                    else {
-                        setTimeout(function(){
-                            pairCard[0].style.backgroundColor = "black";
-                            pairCard[1].style.backgroundColor = "black";
-                            pairCard.splice(0,2);
-                            cardArray[k].classList.add("pointerEventsAuto");
-                        },2000);
-                    }
-                }
+    for(let cardSelect of cardArray) {
+        cardSelect.addEventListener("click", function clique(){
+            //to not let user click after two cards appeared
+            if(pairCard.length < 2 && cardSelect.style.backgroundColor === "black") {
+                cardSelect.style.backgroundColor = "transparent"; 
+                pairCard.push(cardSelect);
+                compare();
             }
         });
     }
