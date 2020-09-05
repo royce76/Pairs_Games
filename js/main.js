@@ -94,6 +94,7 @@ function timeGame() {
     let interval = setInterval(function(){
         win();
         timer --;
+        console.log(timer);
         timeText.innerText = `Left time = ${timer} secondes.`
         if(timer === 0) {
             clearInterval(interval);
@@ -119,12 +120,15 @@ function computeClick () {
     score --;
     scoreText.innerText = `Left click = ${score}.`
     if(score === 0) {
+        // to stop timegame()
+        timer = undefined;
         stopClickCards();
         scoreText.innerText = "You loose.";
         timeText.style.display = "none";
         restartGame();
     }
     else if(score !==0 && k === true ) {
+        timer = undefined;
         stopClickCards();
         scoreText.innerText = "You win.";
         timeText.style.display = "none";
@@ -185,11 +189,39 @@ function restartGame() {
     let restart = document.createElement("button");
     document.getElementById('divUnderMain').style.height = "65vh";
     document.getElementById('divUnderMain').appendChild(restart);
-    restart.classList.add("btn", "btn-danger", "col-8", "offset-2","my-auto");
+    restart.classList.add("btn", "btn-success", "col-8", "offset-2","my-auto");
     restart.style.height = "20%";
     restart.innerText = "Restart";
     document.getElementById("cardDiv").style.display = "none";
     restart.addEventListener("click", function() {
         location.reload();
     });
+    butnRules.classList.add("disabled");
 }
+
+//btn rules works like an alert
+let butnRules = document.getElementById('rules');
+document.getElementById('cardDiv').style.position = "relative";
+document.getElementById('cardDiv').style.zIndex = "3000";
+
+butnRules.addEventListener("click", function showRules(){
+    let rules = document.createElement('p');
+    document.getElementById('cardDiv').appendChild(rules);
+    rules.style.position = "absolute";
+    rules.style.zIndex = "3001";
+    rules.style.height = "55vh";
+    rules.style.translate = "0% 10vh";
+    rules.style.backgroundColor = "lightgrey";
+    rules.innerText = "- Quand le joueur clique sur une carte celle-ci se retourne\n- Quand le joueur clique sur une deuxième carte si elle est identique à la précédente les deux cartes restent face visible autrement les cartes sont à nouveau masquées.\n- Quand toutes les paires sont trouvées et donc que toutes les cartes sont face visible le jeu est terminé.\n- Attention je ne permet pas les doubles cliques";
+    let okayBtn = document.createElement('button');
+    document.getElementById('cardDiv').appendChild(okayBtn);
+    okayBtn.style.position = "absolute";
+    okayBtn.innerText = "okay";
+    okayBtn.style.zIndex = "3001";
+    okayBtn.classList.add("btn-warning");
+    okayBtn.style.translate = "20% 55vh";
+    okayBtn.addEventListener("click",function okay(){
+        rules.style.display = "none";
+        okayBtn.style.display = "none";
+    });
+});
