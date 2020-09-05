@@ -95,19 +95,19 @@ function timeGame() {
         win();
         timer --;
         console.log(timer);
-        timeText.innerText = `Left time = ${timer} secondes.`
+        timeText.innerText = `Left time = ${timer} secondes`
         if(timer === 0) {
             clearInterval(interval);
             stopClickCards;
             timeText.style.display = "none";
             restartGame();
-            scoreText.innerText = "You loose.";
+            scoreText.innerText = "YOU LOOSE";
         }
         else if(timer !==0 && k === true ) {
             clearInterval(interval);
             stopClickCards();
             restartGame();
-            scoreText.innerText = "You win.";
+            scoreText.innerText = "YOU WIN";
             timeText.style.display = "none";       
         }
     }, 1000);    
@@ -118,19 +118,19 @@ let score = 30;
 function computeClick () {
     win();
     score --;
-    scoreText.innerText = `Left click = ${score}.`
+    scoreText.innerText = `Left click = ${score}`
     if(score === 0) {
         // to stop timegame()
         timer = undefined;
         stopClickCards();
-        scoreText.innerText = "You loose.";
+        scoreText.innerText = "YOU LOOSE";
         timeText.style.display = "none";
         restartGame();
     }
     else if(score !==0 && k === true ) {
         timer = undefined;
         stopClickCards();
-        scoreText.innerText = "You win.";
+        scoreText.innerText = "YOU WIN";
         timeText.style.display = "none";
         restartGame();
     }
@@ -178,7 +178,7 @@ function startTheGame() {
         playTheGame();
         timeGame();
         scoreText.innerText = `Left click = ${score}`;
-        timeText.innerText = `left time = ${timer} secondes`;
+        timeText.innerText = `Left time = ${timer} secondes`;
     });
 }
 
@@ -209,17 +209,17 @@ butnRules.addEventListener("click", function showRules(){
     document.getElementById('cardDiv').appendChild(rules);
     rules.style.position = "absolute";
     rules.style.zIndex = "3001";
-    rules.style.height = "55vh";
-    rules.style.translate = "0% 10vh";
+    rules.style.height = "50vh";
+    rules.style.translate = "0%";
     rules.style.backgroundColor = "lightgrey";
-    rules.innerText = "- Quand le joueur clique sur une carte celle-ci se retourne\n- Quand le joueur clique sur une deuxième carte si elle est identique à la précédente les deux cartes restent face visible autrement les cartes sont à nouveau masquées.\n- Quand toutes les paires sont trouvées et donc que toutes les cartes sont face visible le jeu est terminé.\n- Attention je ne permet pas les doubles cliques";
+    rules.innerText = "- Quand le joueur clique sur une carte celle-ci se retourne.\n- Quand le joueur clique sur une deuxième carte si elle est identique à la précédente les deux cartes restent faces visibles autrement les cartes sont à nouveau masquées.\n- Quand toutes les paires sont trouvées et donc que toutes les cartes sont face visible le jeu est terminé.\n- Attention je ne permet pas les doubles clics.";
     let okayBtn = document.createElement('button');
     document.getElementById('cardDiv').appendChild(okayBtn);
     okayBtn.style.position = "absolute";
-    okayBtn.innerText = "okay";
+    okayBtn.innerText = "OK";
     okayBtn.style.zIndex = "3001";
     okayBtn.classList.add("btn-warning");
-    okayBtn.style.translate = "20% 55vh";
+    okayBtn.style.translate = "20% 45vh";
     okayBtn.addEventListener("click",function okay(){
         rules.style.display = "none";
         okayBtn.style.display = "none";
