@@ -68,7 +68,9 @@ function playTheGame() {
             computeClick();
             //to not let user click after two cards appeared
             if(pairCard.length < 2 && cardSelect.style.backgroundColor === "black") {
-                cardSelect.style.backgroundColor = "transparent"; 
+                cardSelect.style.transitionProperty = "backgroundColor";
+                cardSelect.style.transition = "all 0.8s";
+                cardSelect.style.backgroundColor = "transparent";
                 pairCard.push(cardSelect);
                 compare();
             }
@@ -183,7 +185,7 @@ function restartGame() {
     let restart = document.createElement("button");
     document.getElementById('divUnderMain').style.height = "65vh";
     document.getElementById('divUnderMain').appendChild(restart);
-    restart.classList.add("btn", "btn-danger", "col-10", "offset-1","my-auto");
+    restart.classList.add("btn", "btn-danger", "col-8", "offset-2","my-auto");
     restart.style.height = "20%";
     restart.innerText = "Restart";
     document.getElementById("cardDiv").style.display = "none";
