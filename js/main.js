@@ -167,7 +167,7 @@ document.addEventListener( 'dblclick', function(event) {   
 function startTheGame() {
     let button = document.createElement("button");
     document.getElementById("cardDiv").appendChild(button);
-    button.classList.add("btn", "btn-primary", "col-10", "offset-1");
+    button.classList.add("btn", "btn-primary", "col-10", "offset-1", "marginRestart");
     button.style.height = "20vh";
     button.innerText = "Play";
     scoreText.innerText = "WELCOME";

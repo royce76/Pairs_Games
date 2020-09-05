@@ -94,23 +94,28 @@ textarea {
     }
 
     footer {
+      margin-top: 0.5em;
       background-color: #7FDBFF;
     }
 
-    #cardDiv, .marginRestart {
+    .marginRestart {
       margin : 12.2em auto;
     }
     
     .translateRules {
-      translate: 0% -20vh;
+      translate: 0% 20vh;
     }
 
     .translateOkay {
-      translate: 0% 25vh;
+      translate: 0% 65vh;
     }
 
     @media screen and (min-width: 768px) {
       
+      footer {
+        margin-top: 6em;
+      }
+
       .translateRules {
         translate: 0% 2vh;
       }
