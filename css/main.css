@@ -90,7 +90,7 @@ textarea {
     /*General rules*/
   
     header {
-      height: 15vh;
+      height: 20vh;
     }
 
     footer {
@@ -98,9 +98,10 @@ textarea {
     }
 
     #cardDiv {
-      height: 75vh;
+      height: 70vh;
     }
-    /*Utility classes*/
+
+    @media
 
 /* ==========================================================================
    Helper classes
