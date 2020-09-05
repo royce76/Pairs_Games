@@ -31,7 +31,7 @@ function showCard() {
     for(let i = 0; i < randomImgArray.length; i++) {  
         let card = document.createElement("img");
         document.getElementById("cardDiv").appendChild(card);
-        card.classList.add("d-flex", "flex-column", "mx-auto", "my-2");
+        card.classList.add("my-2","offset-1", "col-3","col-md-2", "col-lg-1");
         card.style.width = "30%";
         card.style.height = "15vh";
         card.src = randomImgArray[i];
@@ -57,7 +57,7 @@ function compare() {
                  pairCard[0].style.backgroundColor = "black";
                  pairCard[1].style.backgroundColor = "black";
                  pairCard.splice(0,2);
-            },1000);
+            },500);
         }
     }
 }
@@ -69,7 +69,7 @@ function playTheGame() {
             //to not let user click after two cards appeared
             if(pairCard.length < 2 && cardSelect.style.backgroundColor === "black") {
                 cardSelect.style.transitionProperty = "backgroundColor";
-                cardSelect.style.transition = "all 0.8s";
+                cardSelect.style.transition = "all 0.5s";
                 cardSelect.style.backgroundColor = "transparent";
                 pairCard.push(cardSelect);
                 compare();
@@ -167,9 +167,9 @@ document.addEventListener( 'dblclick', function(event) {   
 function startTheGame() {
     let button = document.createElement("button");
     document.getElementById("cardDiv").appendChild(button);
-    button.classList.add("btn", "btn-primary", "col-10", "offset-1","my-auto");
-    button.style.height = "20%";
-    button.innerText = "Démarrer";
+    button.classList.add("btn", "btn-primary", "col-10", "offset-1");
+    button.style.height = "20vh";
+    button.innerText = "Play";
     scoreText.innerText = "WELCOME";
     button.addEventListener("click", function() {
         button.style.display = "none";
@@ -187,10 +187,9 @@ startTheGame();
 //at the end of the game we delete cards and create a new button to refresh page.
 function restartGame() {
     let restart = document.createElement("button");
-    document.getElementById('divUnderMain').style.height = "65vh";
     document.getElementById('divUnderMain').appendChild(restart);
-    restart.classList.add("btn", "btn-success", "col-8", "offset-2","my-auto");
-    restart.style.height = "20%";
+    restart.classList.add("btn", "btn-success", "col-8", "offset-2", "marginRestart");
+    restart.style.height = "20vh";
     restart.innerText = "Restart";
     document.getElementById("cardDiv").style.display = "none";
     restart.addEventListener("click", function() {
@@ -207,19 +206,18 @@ document.getElementById('cardDiv').style.zIndex = "3000";
 butnRules.addEventListener("click", function showRules(){
     let rules = document.createElement('p');
     document.getElementById('cardDiv').appendChild(rules);
+    rules.classList.add("translateRules")
     rules.style.position = "absolute";
     rules.style.zIndex = "3001";
-    rules.style.height = "50vh";
-    rules.style.translate = "0%";
-    rules.style.backgroundColor = "lightgrey";
+    rules.style.backgroundColor = "#7FDBFF";
     rules.innerText = "- Quand le joueur clique sur une carte celle-ci se retourne.\n- Quand le joueur clique sur une deuxième carte si elle est identique à la précédente les deux cartes restent faces visibles autrement les cartes sont à nouveau masquées.\n- Quand toutes les paires sont trouvées et donc que toutes les cartes sont face visible le jeu est terminé.\n- Attention je ne permet pas les doubles clics.";
     let okayBtn = document.createElement('button');
     document.getElementById('cardDiv').appendChild(okayBtn);
+    okayBtn.classList.add("translateOkay")
     okayBtn.style.position = "absolute";
     okayBtn.innerText = "OK";
     okayBtn.style.zIndex = "3001";
-    okayBtn.classList.add("btn-warning");
-    okayBtn.style.translate = "20% 45vh";
+    okayBtn.classList.add("btn-success");
     okayBtn.addEventListener("click",function okay(){
         rules.style.display = "none";
         okayBtn.style.display = "none";

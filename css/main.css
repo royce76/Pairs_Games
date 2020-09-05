@@ -90,18 +90,46 @@ textarea {
     /*General rules*/
   
     header {
-      height: 20vh;
+      background-color: #7FDBFF;
     }
 
     footer {
-      height: 5vh;
+      background-color: #7FDBFF;
     }
 
-    #cardDiv {
-      height: 70vh;
+    #cardDiv, .marginRestart {
+      margin : 12.2em auto;
+    }
+    
+    .translateRules {
+      translate: 0% -20vh;
     }
 
-    @media
+    .translateOkay {
+      translate: 0% 25vh;
+    }
+
+    @media screen and (min-width: 768px) {
+      
+      .translateRules {
+        translate: 0% 2vh;
+      }
+  
+      .translateOkay {
+        translate: 0% 20vh;
+      }
+    }
+
+    @media screen and (min-width: 1200px) {
+      
+      .translateRules {
+        translate: 0% 2vh;
+      }
+  
+      .translateOkay {
+        translate: 0% 16vh;
+      }
+    }
 
 /* ==========================================================================
    Helper classes
