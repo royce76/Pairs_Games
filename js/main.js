@@ -23,7 +23,6 @@ function randomImg() {
     }   
 }
 
-
 //Empty cardArray
 let cardArray = [];
 // create twelve cards and images in cardArray
@@ -54,18 +53,18 @@ function compare() {
              pairCard.splice(0,2);
         }
         else {
-             setTimeout(function(){
+             setTimeout(function() {
                  pairCard[0].style.backgroundColor = "black";
                  pairCard[1].style.backgroundColor = "black";
                  pairCard.splice(0,2);
-            },2000);
+            },1000);
         }
     }
 }
 
 function playTheGame() {
     for(let cardSelect of cardArray) {
-        cardSelect.addEventListener("click", function clique(){
+        cardSelect.addEventListener("click", function clique() {
             computeClick();
             //to not let user click after two cards appeared
             if(pairCard.length < 2 && cardSelect.style.backgroundColor === "black") {
@@ -77,58 +76,61 @@ function playTheGame() {
     }
 }
 
+// function stop click on cards
+function stopClickCards () {
+    for(cards of cardArray) {
+        cards.addEventListener("click", function(data){
+            data.preventDefault();
+            data.stopPropagation();
+        },true);
+    }
+}
+
+//function time in interval 
 let timer = 60;
 function timeGame() {
     let interval = setInterval(function(){
         win();
         timer --;
         timeText.innerText = `Left time = ${timer} secondes.`
-        console.log(timer);
         if(timer === 0) {
             clearInterval(interval);
-            document.addEventListener("click", function(data){
-                data.preventDefault();
-                data.stopPropagation();
-            },true);
+            stopClickCards;
             timeText.style.display = "none";
+            restartGame();
             scoreText.innerText = "You loose.";
-            timer = 60;
         }
-        else if(timer !==0 && k === true ){
+        else if(timer !==0 && k === true ) {
             clearInterval(interval);
-            document.addEventListener("click", function(data){
-                data.preventDefault();
-                data.stopPropagation();
-            },true);
+            stopClickCards();
+            restartGame();
             scoreText.innerText = "You win.";
-            timeText.style.display = "none";
+            timeText.style.display = "none";       
         }
-    }, 1000);  
+    }, 1000);    
 }
 
+//function count click
 let score = 30;
 function computeClick () {
     win();
     score --;
     scoreText.innerText = `Left click = ${score}.`
     if(score === 0) {
-        document.addEventListener("click", function(data){
-            data.preventDefault();
-            data.stopPropagation();
-        },true);
+        stopClickCards();
         scoreText.innerText = "You loose.";
         timeText.style.display = "none";
-        score = 30;
+        restartGame();
     }
-    else if(score !==0 && k === true ){
-        document.addEventListener("click", function(data){
-            data.preventDefault();
-            data.stopPropagation();
-        },true);
+    else if(score !==0 && k === true ) {
+        stopClickCards();
         scoreText.innerText = "You win.";
         timeText.style.display = "none";
+        restartGame();
     }
 }
+
+//function to help when user wins ( i did not find working method)
 let k = false;
 function win() {    
     if( cardArray[0].style.backgroundColor === "transparent" &&
@@ -143,11 +145,10 @@ function win() {
         cardArray[9].style.backgroundColor === "transparent"  &&
         cardArray[10].style.backgroundColor === "transparent" &&
         cardArray[11].style.backgroundColor === "transparent" 
-    ){
+    ) {
         return k = true;
     }   
 }
-
 
 //Cancel the double click with preventDefault.
 document.addEventListener( 'dblclick', function(event) {   
@@ -157,14 +158,14 @@ document.addEventListener( 'dblclick', function(event) {   
 );
 
 //we create a button and add a event click on
-function startTheGame(){
+function startTheGame() {
     let button = document.createElement("button");
     document.getElementById("cardDiv").appendChild(button);
     button.classList.add("btn", "btn-primary", "col-10", "offset-1","my-auto");
     button.style.height = "20%";
     button.innerText = "Démarrer";
     scoreText.innerText = "WELCOME";
-    button.addEventListener("click", function(){
+    button.addEventListener("click", function() {
         button.style.display = "none";
         randomImg();
         showCard();
@@ -177,17 +178,16 @@ function startTheGame(){
 
 startTheGame();
 
-/* function restartGame() {
-    if(score===0) {
-        let restart = document.createElement("button");
-        document.getElementById('divUnderMain').style.height = "65vh";
-        document.getElementById('divUnderMain').appendChild(restart);
-        restart.classList.add("btn", "btn-danger", "col-10", "offset-1","my-auto");
-        restart.style.height = "20%";
-        restart.innerText = "Restart";
-        document.getElementById("cardDiv").style.display = "none";
-        restart.addEventListener("click", function(){
-            console.log("coucou");
-        });
-    }
-} */
+//at the end of the game we delete cards and create a new button to refresh page.
+function restartGame() {
+    let restart = document.createElement("button");
+    document.getElementById('divUnderMain').style.height = "65vh";
+    document.getElementById('divUnderMain').appendChild(restart);
+    restart.classList.add("btn", "btn-danger", "col-10", "offset-1","my-auto");
+    restart.style.height = "20%";
+    restart.innerText = "Restart";
+    document.getElementById("cardDiv").style.display = "none";
+    restart.addEventListener("click", function() {
+        location.reload();
+    });
+}
