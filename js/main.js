@@ -1,6 +1,27 @@
+//target div of card
+let cardDiv = document.getElementById("cardDiv");
+
 //target paragraph score
 let scoreText = document.getElementById('score');
 let timeText = document.getElementById('timer');
+
+//create button start
+let button = document.createElement("button");
+cardDiv.appendChild(button);
+button.classList.add("btn", "btn-primary", "col-10", "offset-1", "marginRestart");
+button.style.height = "20vh";
+button.innerText = "Play";
+button.style.fontSize = "4em";
+
+//create button restart
+let restart = document.createElement("button");
+document.getElementById('divUnderMain').appendChild(restart);
+restart.classList.add("btn", "btn-success", "col-8", "offset-2", "marginRestart");
+restart.style.height = "20vh";
+restart.style.fontSize = "4em";
+restart.innerText = "Restart";
+restart.style.display = "none";
+
 
 //main array of sources images 
 let imgArray = ['img/aigle.png', 'img/canard.png', 'img/flammand.png', 'img/fly.png', 'img/penguin.png', 'img/singer.png',
@@ -30,7 +51,7 @@ let cardArray = [];
 function showCard() {
     for(let i = 0; i < randomImgArray.length; i++) {  
         let card = document.createElement("img");
-        document.getElementById("cardDiv").appendChild(card);
+        cardDiv.appendChild(card);
         card.classList.add("my-2","offset-1", "col-3","col-md-2", "col-lg-1");
         card.style.width = "30%";
         card.style.height = "15vh";
@@ -40,13 +61,10 @@ function showCard() {
     }
 }
 
-//function to play the game
-//first you can only click backgroundColor = "black"
-//then image appears
+//function to compare two cards in an array
 let pairCard = [];
-
 function compare() {
-    //after two clicks the pair of clicked images is compared in a table     
+    //after two clicks the pair of clicked images is compared in an array     
     if(pairCard.length === 2) {
         if(pairCard[0].src === pairCard[1].src) {
              //we empty that pair Array
@@ -57,11 +75,14 @@ function compare() {
                  pairCard[0].style.backgroundColor = "black";
                  pairCard[1].style.backgroundColor = "black";
                  pairCard.splice(0,2);
-            },500);
+            },1000);
         }
     }
 }
 
+//function to play the game
+//first you can only click backgroundColor = "black"
+//then image appears
 function playTheGame() {
     for(let cardSelect of cardArray) {
         cardSelect.addEventListener("click", function clique() {
@@ -78,7 +99,7 @@ function playTheGame() {
     }
 }
 
-// function stop click on cards
+//function stop click on cards
 function stopClickCards () {
     for(cards of cardArray) {
         cards.addEventListener("click", function(data){
@@ -163,13 +184,8 @@ document.addEventListener( 'dblclick', function(event) {   
   },true //capturing phase!!
 );
 
-//we create a button and add a event click on
+//we use the button start
 function startTheGame() {
-    let button = document.createElement("button");
-    document.getElementById("cardDiv").appendChild(button);
-    button.classList.add("btn", "btn-primary", "col-10", "offset-1", "marginRestart");
-    button.style.height = "20vh";
-    button.innerText = "Play";
     scoreText.innerText = "WELCOME";
     button.addEventListener("click", function() {
         button.style.display = "none";
@@ -186,33 +202,30 @@ startTheGame();
 
 //at the end of the game we delete cards and create a new button to refresh page.
 function restartGame() {
-    let restart = document.createElement("button");
-    document.getElementById('divUnderMain').appendChild(restart);
-    restart.classList.add("btn", "btn-success", "col-8", "offset-2", "marginRestart");
-    restart.style.height = "20vh";
-    restart.innerText = "Restart";
-    document.getElementById("cardDiv").style.display = "none";
+    restart.style.display = "block";
+    cardDiv.style.display = "none";
     restart.addEventListener("click", function() {
         location.reload();
     });
     butnRules.classList.add("disabled");
 }
 
+//reinventing the wheel a little less well
 //btn rules works like an alert
 let butnRules = document.getElementById('rules');
-document.getElementById('cardDiv').style.position = "relative";
-document.getElementById('cardDiv').style.zIndex = "3000";
+cardDiv.style.position = "relative";
+cardDiv.style.zIndex = "3000";
 
 butnRules.addEventListener("click", function showRules(){
     let rules = document.createElement('p');
-    document.getElementById('cardDiv').appendChild(rules);
+    cardDiv.appendChild(rules);
     rules.classList.add("translateRules")
     rules.style.position = "absolute";
     rules.style.zIndex = "3001";
     rules.style.backgroundColor = "#7FDBFF";
     rules.innerText = "- Quand le joueur clique sur une carte celle-ci se retourne.\n- Quand le joueur clique sur une deuxième carte si elle est identique à la précédente les deux cartes restent faces visibles autrement les cartes sont à nouveau masquées.\n- Quand toutes les paires sont trouvées et donc que toutes les cartes sont face visible le jeu est terminé.\n- Attention je ne permet pas les doubles clics.";
     let okayBtn = document.createElement('button');
-    document.getElementById('cardDiv').appendChild(okayBtn);
+    cardDiv.appendChild(okayBtn);
     okayBtn.classList.add("translateOkay")
     okayBtn.style.position = "absolute";
     okayBtn.innerText = "OK";
