@@ -88,18 +88,23 @@ textarea {
    ========================================================================== */
 
     /*General rules*/
+
+    * {
+      font-family: 'Grandstander', cursive;
+    }
   
     header {
       background-color: #7FDBFF;
     }
 
     footer {
-      margin-top: 0.5em;
       background-color: #7FDBFF;
     }
+    
+    /*Utility class*/
 
     .marginRestart {
-      margin : 12.2em auto;
+      margin : 3em auto;
     }
     
     .translateRules {
@@ -112,10 +117,6 @@ textarea {
 
     @media screen and (min-width: 768px) {
       
-      footer {
-        margin-top: 6em;
-      }
-
       .translateRules {
         translate: 0% 2vh;
       }
@@ -126,7 +127,11 @@ textarea {
     }
 
     @media screen and (min-width: 1200px) {
-      
+
+      #cardDiv {
+        margin : 5em auto;
+      }
+
       .translateRules {
         translate: 0% 2vh;
       }
