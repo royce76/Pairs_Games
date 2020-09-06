@@ -8,7 +8,7 @@ let timeText = document.getElementById('timer');
 //create button start
 let button = document.createElement("button");
 cardDiv.appendChild(button);
-button.classList.add("btn", "btn-primary", "col-10", "offset-1", "marginRestart");
+button.classList.add("btn", "btn-primary", "col-10", "offset-1", "marginRestart", "text-center");
 button.style.height = "20vh";
 button.innerText = "Play";
 button.style.fontSize = "4em";
@@ -16,7 +16,7 @@ button.style.fontSize = "4em";
 //create button restart
 let restart = document.createElement("button");
 document.getElementById('divUnderMain').appendChild(restart);
-restart.classList.add("btn", "btn-success", "col-8", "offset-2", "marginRestart");
+restart.classList.add("btn", "btn-success", "col-8", "offset-2", "marginRestart", "text-center");
 restart.style.height = "20vh";
 restart.style.fontSize = "4em";
 restart.innerText = "Restart";
